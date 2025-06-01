@@ -24,7 +24,7 @@ public class SqlQueryTool implements Function<RunSqlQueryRequest, RunSqlQueryRes
     public RunSqlQueryResponse apply(RunSqlQueryRequest runSqlQueryRequest) {
         var runSqlQueryResponse = new RunSqlQueryResponse();
 
-        try (Connection connection = jdbcTemplate.getDataSource().getConnection();
+        try (var connection = jdbcTemplate.getDataSource().getConnection();
              var statement = connection.createStatement();
              var resultSet = statement.executeQuery(runSqlQueryRequest.getSql())) {
             log.info("Running sql {}", runSqlQueryRequest.getSql());

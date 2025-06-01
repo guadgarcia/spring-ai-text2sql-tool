@@ -1,6 +1,7 @@
 package com.guadgarcia.ollama.service;
 
 import com.guadgarcia.ollama.model.RunSqlQueryResponse;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.ai.chat.client.advisor.SimpleLoggerAdvisor;
@@ -15,6 +16,7 @@ import java.util.Map;
 
 @Service
 @Slf4j
+@RequiredArgsConstructor
 public class OllamaService {
 
     private static final String PROMPT_TEMPLATE_PATH_FORMAT = "classpath:prompts/%s";
@@ -25,13 +27,6 @@ public class OllamaService {
     private final ChatClient chatClient;
     private final ResourceLoader resourceLoader;
     private final ToolCallback sqlQueryToolCallback;
-
-    public OllamaService(ChatClient.Builder chatClientBuilder, ResourceLoader resourceLoader,
-                         ToolCallback sqlQueryToolCallback) {
-        this.chatClient = chatClientBuilder.build();
-        this.resourceLoader = resourceLoader;
-        this.sqlQueryToolCallback = sqlQueryToolCallback;
-    }
 
     public RunSqlQueryResponse query(String question) {
         var userPrompt = buildUserPrompt(question);
