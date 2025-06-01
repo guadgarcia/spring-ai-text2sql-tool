@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: ollama
+  docker:
+    compose:
+      enabled: true
+  threads:
+    virtual:
+      enabled: true
+  main:
+    allow-bean-definition-overriding: true
+  datasource:
+    url: jdbc:postgresql://localhost:5432/ollama
+    username: postgres
+    password: password
+    driver-class-name: org.postgresql.Driver
+  flyway:
+    enabled: true
+    url: ${spring.datasource.url}
+    user: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+    locations: classpath:db/migration
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      init:
+        pull-model-strategy: when-missing
+      chat:
+        options:
+          model: llama3.1
+          temperature: 0.1
+
+logging:
+  level:
+    ROOT: debug
