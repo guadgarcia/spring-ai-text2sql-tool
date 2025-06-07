@@ -1,5 +1,4 @@
 ===
-
 Generate and run a SQL query against a PostgreSQL database
 
 1. If the provided context is sufficient, please generate a valid query without any explanations for the question
@@ -30,10 +29,10 @@ create table stock_trade (
 Below are a number of examples of questions and their corresponding SQL queries.
 
 User input: Which stocks were sold in 2017
-SQL query: select stock_symbol from stock_trade where transaction_type = 'sell' and sale_date '2017-01-01' AND '2017-12-31';
+SQL query: select stock_symbol from stock_trade where transaction_type = 'sell' and sale_date between '2017-01-01' AND '2017-12-31';
 
 User input: How many stocks were bought in 2015
-SQL query: select sum(quantity) from stock_trade where transaction_type = 'buy' and purchase_date '2015-01-01' AND '2015-12-31';
+SQL query: select sum(quantity) from stock_trade where transaction_type = 'buy' and purchase_date between '2015-01-01' AND '2015-12-31';
 
 ===
 Question
